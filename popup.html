@@ -1,42 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Daily Task Manager</title>
-    <link rel="stylesheet" href="popup.css">
-  </head>
-  <body>
-   <div class="container">
-    <div class="">
-      <input type="text" id="taskTitle" placeholder="Stundup Title" />
-      <input type="text" id="taskName" placeholder="Enter Task Name" />
-      <input type="text" id="taskStatus" placeholder="Enter Task Status" />
-      <input type="url" id="taskLink" placeholder="Enter Task Link" />
-      <button id="addTaskButton">Add Task</button>
-      <button id="updateTaskButton">Update Task</button>
-      <button id="updateTitleButton">Update Title</button>
-    </div>
-    <div id="tasks">
-      <ul id="taskList"></ul>
-    </div>
-   </div>
 
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Task Manager</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
 
-<!-- <div id="editModal" class="modal">
-  <div class="modal-content">
-      <span class="close-modal" id="closeModal">&times;</span>
-      <h2>Edit Task</h2>
-      <input type="text" id="editedName" placeholder="Edit Task title">
-    
-      <button id="saveEditButton">Update</button>
+<body>
+  <div>
+    <div class="container">
+      <div class="">
+        <input type="text" id="taskTitle" placeholder="Stundup Title" />
+        <input type="text" id="taskName" placeholder="Enter Task Name" />
+        <input type="text" id="taskStatus" placeholder="Enter Task Status" />
+        <input type="url" id="taskLink" placeholder="Enter Task Link" />
+        <button id="addTaskButton">Add Task</button>
+        <button id="updateTaskButton">Update Task</button>
+        <button id="updateTitleButton">Update Title</button>
+      </div>
+      <div id="tasks">
+        <ul id="taskList"></ul>
+      </div>
+    </div>
   </div>
-</div> -->
 
+  <div class="modal-popup" id="popup-1">
+    <div class="overly" ></div>
+    <div class="content">
+      <div class="close-btn" id="closeModal">&times;</div>
+      <h1>title</h1>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem
+        rem nisi illo autem quibusdam est architecto ex hic nulla earum!</p>
+    </div>
+  </div>
+  <button id="showModal">Show Modal</button>
 
-
-   <!-- Modal -->
-<div id="editModal" class="modal">
+  <!-- Modal -->
+  <!-- <div id="editModal" class="modal">
   <div class="modal-content">
     <span class="close" id="closeModal">&times;</span>
     <h2>Edit Task</h2>
@@ -44,11 +46,12 @@
     <input type="text" id="editedStatus" placeholder="Task Status">
     <input type="text" id="editedLink" placeholder="Task Link">
     <button id="updateButton">Update</button>
+  </div> -->
   </div>
-</div>
 
-    <script src="new.js"></script>
-  </body>
+  <script src="new.js"></script>
+</body>
+
 </html>
 
 <!-- <!DOCTYPE html>

@@ -258,13 +258,13 @@ document.getElementById("addTaskButton").addEventListener("click", function () {
 
 // Modal
 
-function openEditModal() {
-  const closeModalButton = document.getElementById("closeModal");
-  closeModalButton.addEventListener("click", function () {
-    const editModal = document.getElementById("editModal");
-    editModal.style.display = "none";
-  });
-}
+// function openEditModal() {
+//   const closeModalButton = document.getElementById("closeModal");
+//   closeModalButton.addEventListener("click", function () {
+//     const editModal = document.getElementById("editModal");
+//     editModal.style.display = "none";
+//   });
+// }
 
 // modal functionallity//
 
@@ -299,3 +299,18 @@ function openEditModal() {
 //   // Close the edit modal
 //   closeEditModal();
 // }
+
+
+// new modal
+document.getElementById('showModal').addEventListener('click', function(){
+  document.getElementById('popup-1').classList.toggle("active")
+  // console.log('click');
+})
+document.getElementById('closeModal').addEventListener('click', function(){
+  document.getElementById('popup-1').classList.toggle("active")
+  // console.log('click');
+})
+// document.getElementById('closeBtn').addEventListener('click', function(){
+//   // console.log('click');
+//   document.getElementById('content').style.display = "none"
+// })
