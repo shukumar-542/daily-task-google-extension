@@ -27,7 +27,9 @@ function addTask(taskTitle, taskName, taskStatus, taskLink, date) {
   };
   // console.log(date)
   if (!taskName || !taskStatus || !taskLink) {
-    return alert("Get the valid input!!");
+    // return alert("Get the valid input!!");
+    document.getElementById('addTaskButton').style.display = "disabled"
+
   }
 
 
@@ -54,6 +56,15 @@ function displayTasks() {
   const taskList = document.getElementById("taskList");
   taskList.innerHTML = "";
 
+     // chatGpt code
+     function createEditTitleEventListener(dailyTask, index) {
+      return function() {
+        EditTitleText(dailyTask.title, index);
+      };
+    }
+
+
+
   dailyTasks.forEach((dailyTask, index) => {
     const listItem = document.createElement("div");
     listItem.innerHTML = `<div class="title-container">
@@ -68,11 +79,26 @@ function displayTasks() {
     deleteBtn.addEventListener("click", function () {
       deleteTask(dailyTask.title);
     });
-    titleEdit.addEventListener("click", function () {
-      EditTitleText(dailyTask.title, index);
+    // titleEdit.addEventListener("click", function () {
+    //   EditTitleText(dailyTask.title, index);
+    // });
+
+
+    // chatGpt Code
+
+    titleEdit.addEventListener("click", function() {
+      handleEditClick(dailyTask.title, index);
     });
 
+
+  
+
     const tasksList = document.createElement("ul");
+
+
+   
+
+
 
     dailyTask.tasks.forEach((task, index) => {
       const taskItem = document.createElement("li");
@@ -89,23 +115,11 @@ function displayTasks() {
         updateTask(task.taskName, task.taskStatus, task.taskLink, index);
       });
 
-      // const editBtn = taskItem.querySelector(".editBtn");
-
-      // // Attach the click event listener to the edit button
-      // editBtn.addEventListener("click", function () {
-
-        
 
 
+  
 
-      //   updateTask(task.taskName, task.taskStatus, task.taskLink, index, taskIndex);
-      // });
 
-      // editBtn.addEventListener("click", function () {
-      //   fillInputFieldsForEdit(task.taskName, task.taskStatus, task.taskLink);
-      //   document.getElementById("updateTaskButton").style.display = "block";
-      // });
-      
     
 
       const deleteBtn = taskItem.querySelector(".deleteBtn");
@@ -122,6 +136,50 @@ function displayTasks() {
 }
 
 
+// chat gpt working
+
+function handleEditClick(inputTaskTitle, index) {
+  document.getElementById("addTaskButton").style.display = "none";
+  document.getElementById("updateTaskButton").style.display = "none";
+  document.getElementById("taskName").style.display = "none";
+  document.getElementById("taskStatus").style.display = "none";
+  document.getElementById("taskLink").style.display = "none";
+  document.getElementById("updateTitleButton").style.display = "block";
+
+  const newTaskTitle = document.getElementById("taskTitle");
+  newTaskTitle.value = inputTaskTitle;
+
+  document.getElementById("updateTitleButton").addEventListener("click", function() {
+    const newTaskTitleValue = document.getElementById("taskTitle").value;
+    updateTaskTitle(inputTaskTitle, newTaskTitleValue, index);
+
+    document.getElementById("addTaskButton").style.display = "block";
+    document.getElementById("taskName").style.display = "block";
+    document.getElementById("taskStatus").style.display = "block";
+    document.getElementById("taskLink").style.display = "block";
+    document.getElementById("updateTitleButton").style.display = "none";
+  });
+}
+
+
+// chat gpt code working
+function updateTaskTitle(oldTitle, newTitle, index) {
+  const dailyTask = dailyTasks.find((task) => task.title === oldTitle);
+
+  if (dailyTask) {
+    dailyTask.title = newTitle;
+    // Update the title also in the displayed UI if needed
+    const titleElement = document.querySelector(`#taskList div:nth-child(${index + 1}) h2`);
+    if (titleElement) {
+      titleElement.innerText = newTitle;
+    }
+
+    saveData();
+    displayTasks();
+  }
+}
+
+
 
 
 
@@ -129,6 +187,7 @@ function displayTasks() {
 
 
 function EditTitleText(inputTaskTitle, index) {
+  // console.log(index);
   document.getElementById("addTaskButton").style.display = "none";
   document.getElementById("updateTaskButton").style.display = "none";
   document.getElementById("taskName").style.display = "none";
@@ -142,9 +201,12 @@ function EditTitleText(inputTaskTitle, index) {
   newTaskTitle.value = inputTaskTitle;
   document.getElementById("updateTitleButton").addEventListener("click", function () {
       const newTaskTitle = document.getElementById("taskTitle").value;
-      dailyTasks.forEach((tassk) => (tassk.title = newTaskTitle));
-      saveData();
-      displayTasks();
+      // const test = dailyTasks.find((tassk) => tassk);
+      // console.log(test.title);
+      console.log(index);
+      // dailyTasks[index].title  = newTaskTitle
+      // saveData();
+      // displayTasks();
 
 
       document.getElementById("addTaskButton").style.display = "block";
@@ -256,61 +318,12 @@ document.getElementById("addTaskButton").addEventListener("click", function () {
   document.getElementById("taskLink").value = "";
 });
 
-// Modal
-
-// function openEditModal() {
-//   const closeModalButton = document.getElementById("closeModal");
-//   closeModalButton.addEventListener("click", function () {
-//     const editModal = document.getElementById("editModal");
-//     editModal.style.display = "none";
-//   });
-// }
-
-// modal functionallity//
-
-// Function to open the edit modal
-// function openEditModal(dailyTask,index) {
-//   const modal = document.getElementById("editModal");
-//   modal.style.display = "block";
-
-//   // Fill the input fields with task data
-//   document.getElementById("editedName").value = taskName;
-
-//   // Add event listener to the update button
-//   const saveEditButton = document.getElementById("saveEditButton");
-//   saveEditButton.addEventListener("click", function () {
-//       saveEditedTask(taskTitle, taskName);
-//   });
-// }
-
-// // Function to close the edit modal
-// function closeEditModal() {
-//   const modal = document.getElementById("editModal");
-//   modal.style.display = "none";
-// }
-
-// // Function to save the edited task
-// function saveEditedTask(taskTitle, taskName) {
-//   const editedName = document.getElementById("editedName").value;
-
-//   // Update the task data and save it (you can implement this part)
-//   // ...
-
-//   // Close the edit modal
-//   closeEditModal();
-// }
-
 
 // new modal
 document.getElementById('showModal').addEventListener('click', function(){
   document.getElementById('popup-1').classList.toggle("active")
-  // console.log('click');
 })
 document.getElementById('closeModal').addEventListener('click', function(){
   document.getElementById('popup-1').classList.toggle("active")
-  // console.log('click');
 })
-// document.getElementById('closeBtn').addEventListener('click', function(){
-//   // console.log('click');
-//   document.getElementById('content').style.display = "none"
-// })
+
